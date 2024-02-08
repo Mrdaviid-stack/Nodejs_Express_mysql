@@ -16,6 +16,10 @@ class Users extends Model {
         const hash = bcrypt.hashSync(this.password, 12);
         this.password = hash;
     }
+
+    $beforeUpdate() {
+        this.updated_at = new Date();
+    }
 }
 
 module.exports = Users;

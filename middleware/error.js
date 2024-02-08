@@ -27,6 +27,11 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
+    if (error.statusCode === 404) {
+        const message = `User not found`;
+        error = new ErrorResponse(message, 404);
+    }
+
     res.status(error.statusCode || 500).json({
         success: false,
         error: error.message || 'Server Error'
