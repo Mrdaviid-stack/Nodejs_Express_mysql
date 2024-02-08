@@ -25,6 +25,12 @@ const errorHandler = (err, req, res, next) => {
             success: false,
             message: `Duplicate ${constraintFormmating(err.constraint)} please try again.`,
         });
+    } else if (err instanceof NotFoundError) {
+        res.status(404).send({
+            message: err.message,
+            type: 'NotFound',
+            data: {}
+        });
     }
 
     if (error.statusCode === 404) {

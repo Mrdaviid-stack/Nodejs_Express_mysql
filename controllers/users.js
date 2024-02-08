@@ -27,7 +27,7 @@ exports.getUsers = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
     try {
         const user = await Users.query().findById(req.params.id);
-        if (!user) return next(new ErrorResponse(`error`, 401))
+        if (!user) return next(new ErrorResponse(`error`, 404))
         delete user.password;
         res.status(200).json({ success: true, data: user });
     } catch (error) {
@@ -45,7 +45,7 @@ exports.getUser = async (req, res, next) => {
 exports.createUser = async (req, res, next) => {
     try {
         const user = await Users.query().insert(req.body);
-        if (!user) return next(new ErrorResponse(`error`, 401))
+        if (!user) return next(new ErrorResponse(`error`, 404))
         res.status(201).json({ success: true, message: 'Successfully Inserted!' });
     } catch (error) {
         next(error);
@@ -61,7 +61,7 @@ exports.createUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         const user = await Users.query().findById(req.params.id).patch(req.body);
-        if (!user) return next(new ErrorResponse(`User not found with the ID of ${req.params.id}`, 404))
+        if (!user) return next(new ErrorResponse(`error`, 404))
         res.status(200).json({ success: true, message: 'Successfully Updated.' });
     } catch (error) {
         next(error);
