@@ -10,6 +10,7 @@ exports.up = async function(knex) {
         table.string('firstname').notNullable()
         table.string('lastname').notNullable()
         table.string('email').notNullable().unique()
+        table.string('phone', 13).unique()
         table.string('password').notNullable()
         table.enum('status', ['active','deactivate']).defaultTo('active')
         table.dateTime('created_at').defaultTo(knex.fn.now())
