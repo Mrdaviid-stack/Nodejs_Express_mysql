@@ -13,6 +13,13 @@ module.exports = {
       user: 'root',
       password: 'root',
       database: 'blog'
+    },
+    migrations: {
+      tableName: 'knex_migrations',
+      directory: './config/migrations'
+    },
+    seeds: {
+      directory: './config/seeds'
     }
   },
 
